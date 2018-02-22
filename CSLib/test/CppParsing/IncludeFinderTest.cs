@@ -55,7 +55,7 @@ namespace DevPal.CSLib.CppParsing
 	{
 		private TestIncludeFinder mTestIncludeFinder;
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void SetupFixture()
 		{
 			List<string> include_paths = new List<string>();
