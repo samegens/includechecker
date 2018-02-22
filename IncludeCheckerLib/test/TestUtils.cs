@@ -13,6 +13,11 @@ namespace DevPal.IncludeChecker
         /// <param name="inRelativePath">Path relative to the IncludeChecker root directory.</param>
         public static string sGetFullPath(string inRelativePath)
         {
+            if (System.IO.File.Exists(inRelativePath))
+            {
+                return inRelativePath;
+            }
+
             if (string.IsNullOrEmpty(sTestRootPath))
             {
                 // Assume that the executing assembly is located at IncludeCheckerLib\bin\Release\IncludeCheckerLib.dll
@@ -21,9 +26,12 @@ namespace DevPal.IncludeChecker
             }
 
             string full_path = sTestRootPath + inRelativePath;
-            if (!System.IO.File.Exists(full_path))
-                throw new Exception(@"Could not find test file " + inRelativePath + ", test root is " + sTestRootPath + @". Is the assembly being tested run from IncludeCheckerLib\bin\Release?");
-            return full_path;
+            if (System.IO.File.Exists(full_path))
+            {
+                return full_path;
+            }
+
+            throw new Exception(@"Could not find test file " + inRelativePath + ", test root is " + sTestRootPath + @". Is the assembly being tested run from IncludeCheckerLib\bin\Release?");
         }
 
 
