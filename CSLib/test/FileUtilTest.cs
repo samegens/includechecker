@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using NUnit.Framework;
-using DevPal.CSLib;
 
 
 namespace DevPal.CSLib.Tests
@@ -13,38 +12,29 @@ namespace DevPal.CSLib.Tests
 		[Test]
 		public void TestGetFilesRecursively()
 		{
-			// just to be sure to start with a clean dir
-			try 
-			{
-				Directory.Delete(".\\testdir", true);
-			}
-			catch (DirectoryNotFoundException) 
-			{
-				// directory not found, that's exactly what we want
-			}
+            string tempDir = CreateTempDirectory();
 
-			Directory.CreateDirectory(".\\testdir");
-			Directory.CreateDirectory(".\\testdir\\subdir");
-			Directory.CreateDirectory(".\\testdir\\subdir2");
-			Assert.IsTrue(Directory.Exists(".\\testdir\\subdir2"));
+			Directory.CreateDirectory(Path.Combine(tempDir, "testdir"));
+			Directory.CreateDirectory(Path.Combine(tempDir, "testdir\\subdir"));
+			Directory.CreateDirectory(Path.Combine(tempDir, "testdir\\subdir2"));
+			Assert.IsTrue(Directory.Exists(Path.Combine(tempDir, "testdir\\subdir2")));
 
 			// test directory tree without files
-			List<string> files = FileUtil.GetFilesRecursively(".\\testdir");
+			List<string> files = FileUtil.GetFilesRecursively(Path.Combine(tempDir, ".\\testdir"));
 			Assert.AreEqual(0, files.Count);
 
 			// now add files
-			CreateFile(".\\testdir\\file1.txt");
-			CreateFile(".\\testdir\\subdir\\file2.txt");
-			CreateFile(".\\testdir\\subdir\\file3.txt");
-			CreateFile(".\\testdir\\subdir2\\file4.txt");
-			CreateFile(".\\testdir\\subdir2\\file5.txt");
-			CreateFile(".\\testdir\\subdir2\\file6.txt");
+			CreateFile(Path.Combine(tempDir, "testdir\\file1.txt"));
+			CreateFile(Path.Combine(tempDir, "testdir\\subdir\\file2.txt"));
+			CreateFile(Path.Combine(tempDir, "testdir\\subdir\\file3.txt"));
+			CreateFile(Path.Combine(tempDir, "testdir\\subdir2\\file4.txt"));
+			CreateFile(Path.Combine(tempDir, "testdir\\subdir2\\file5.txt"));
+			CreateFile(Path.Combine(tempDir, "testdir\\subdir2\\file6.txt"));
 
-			files = FileUtil.GetFilesRecursively(".\\testdir");
+			files = FileUtil.GetFilesRecursively(Path.Combine(tempDir, "testdir"));
 			Assert.AreEqual(6, files.Count);
 
-			Directory.Delete(".\\testdir", true);
-			Assert.IsFalse(Directory.Exists(".\\testdir"));
+			Directory.Delete(tempDir, true);
 		}
 
 		[Test]
@@ -207,7 +197,26 @@ namespace DevPal.CSLib.Tests
 
 		//////////////////////// private helpers //////////////////////////////////////
 
-		private void CreateFile(string path)
+        private string CreateTempDirectory()
+        {
+            var tempDir = "\\temp\\";
+            string randomChars = "abcdefghijklmnopqrstuvwxyz0123456789";
+            const int nrCharsToGenerate = 4;
+            var rnd = new Random();
+            for (int i = 0; i < nrCharsToGenerate; i++)
+            {
+                tempDir = tempDir + randomChars[rnd.Next(0, randomChars.Length)];
+            }
+            if (Directory.Exists(tempDir))
+            {
+                Directory.Delete(tempDir, true);
+            }
+            Directory.CreateDirectory(tempDir);
+            return tempDir;
+        }
+
+
+        private void CreateFile(string path)
 		{
 			StreamWriter sw = new StreamWriter(path);
             sw.Write("generated test file, you can safely delete me");
