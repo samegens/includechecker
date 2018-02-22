@@ -11,9 +11,9 @@ namespace DevPal.CSLib.Tests.CppParsing
 		public void TestRemoveIncludes()
 		{
 			CppParser parser = new CppParser();
-			string contents = @"// #include ""hello.h""\n#include ""hello.h""\n\nclass hello {\n};\n";
+			string contents = "// #include \"hello.h\"\n#include \"hello.h\"\n\nclass hello {\n};\n";
 			parser.RemoveIncludes(ref contents);
-			string expected_contents = @"// #include ""hello.h""\n\n\nclass hello {\n};\n";
+			string expected_contents = "// #include \"hello.h\"\n\n\nclass hello {\n};\n";
 			Assert.AreEqual(expected_contents, contents);
 		}
 
