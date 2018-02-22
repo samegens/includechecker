@@ -1,0 +1,1 @@
+..\bin\IncludeChecker.exe --configuration=complex\includechecker-complex.xml --directory complex %1

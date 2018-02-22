@@ -1,0 +1,1 @@
+..\bin\IncludeChecker.exe -I "c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include" simple\simple.cpp

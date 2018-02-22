@@ -1,0 +1,74 @@
+
+Roadmap for te-common
+=====================
+
+This is the high-level roadmap/plan for the immediate to near term for
+TE-Common.  It is not set in stone, but then very little is.  Mostly,
+it is designed to give an an idea of where this project is going.
+
+1. Release 2.1.0 - Q1 2004
+
+The first thing that needs to happen is to complete the release of
+2.1.0.  This release will be important for a number of reasons:
+
+	* It will be the first widely publicized release of the
+	  project.  Notices will be put on the website as well as a
+	  posting on freshmeat.net.
+	
+	* It will be the first release of the software which includes
+	  comprehensive regression tests.
+
+Major features which will be part of the release will include:
+
+	* New classes to support JFC/Swing development
+	* New classes to process delimited text files
+	* New classes to provide string formatting capabilities
+	* New classes to provide parameterized database configuration
+	* Support for POSIX command line options
+	* Support for default CommandOption values
+	* Built-in support for repeatable CommandOptions, including
+	  delimited CommandOptions
+
+Changes in this release from the 2.0-Beta2 release include:
+
+	* Break dependency of the core library on Jaxor
+
+	  This change can break some legacy code, depending on the
+	  version of Jaxor being used.  Previously, the QueryHandler
+	  class would fall back to the JaxorSession to get a
+	  connection.  This no longer happens in the core library, but
+	  the legacy code is still available as an extension package.
+	
+	* Support for accessing system properties from AppConfig
+	* AppConfig supports more than one registered ConfigLoader
+	* AbstractCommandOption class to assist OO command line parsing
+	* Integrated versioning information
+
+This release must also include comprehensive JUnit unit tests to
+provide assurance of backward compatibility and credibility of the
+project, so it will be taken seriously.
+
+In addition to the unit tests, all existing documentation must be
+reviewed and expanded where appropriate to provide enough information
+to enable use of the project without extra diffulty.
+
+Finally, the project website needs to be updated to provide better
+visual design and more examples that introduce the facilities present
+in the project.
+
+2. Release 2.2.0 - Q4 2004
+
+This release will primarily be a refactoring of the 2.1 release to
+provide complete i18n/l10n support in all of the classes.  This is
+mostly complete already, but there are a number of places which
+contain hard-coded English messages.  As part of the refactoring
+exercise, the following things will be targeted:
+
+	* Maintain 100% backward compatibility with the 2.1 release
+	* Centralize common code where appropriate
+
+3. Beyond 2.2
+
+There is no current longer-term plan based on the existing
+requirements.  Specific functionality will be added on an as-needed
+basis, depending on what is required for any current project work.

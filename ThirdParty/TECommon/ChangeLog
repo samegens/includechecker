@@ -1,0 +1,44 @@
+2004-07-19 Andrew S. Townley <atownley>
+	* Added command options and command listener for
+	  handling ErrorTrace settings
+	* Added DefaultCommandListener implementation to
+	  reduce boilerplate code required to integrate
+	  command-line argument handling.
+	
+	* src/command/CommandOption.cs
+
+	  Added parsing of key=value options to be used for
+	  complex, repeatable argument handling.
+
+	* src/trace/TraceCore.cs
+
+	  Added synchronization code for the map of objects
+	  to prevent any issues during derived class 
+	  instantiation.
+
+	* te-common.build
+
+	  Added documentation to the binary distribution zip file.
+
+2004-06-20 Andrew S. Townley <atownley>
+	* Added custom build counter NAnt task
+	* Added Property file support
+
+2004-06-17 Andrew S. Townley <atownley>
+	* src/io/IniFileProcessor.cs
+	  
+	  Fixed bug which prevented handling empty INI values.
+
+2004-06-15 Andrew S. Townley <atownley>
+	* Added INI file parsing support
+
+2004-06-10 Andrew S. Townley <atownley>
+	* Ported the IO package from the Java Edition
+
+2004-06-09 Andrew S. Townley <atownley>
+	* Added NAnt build support
+	* Ported CommandParser unit tests
+	* Restructured source tree
+
+2004-05-18 Andrew S. Townley <atownley>
+	* Initial implementation of the command line argument parser

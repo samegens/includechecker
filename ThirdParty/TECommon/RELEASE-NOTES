@@ -1,0 +1,46 @@
+
+Release Notes for te-common.NET 2.1-pre1 (Month Day, Year)
+====================================================
+
+This is the initial release of the .NET port of the library.
+
+This release includes both binary and source versions of the project.
+Also included with each of the distribution files should have been a
+copy of the software LICENSE.
+
+
+Using the Binary Release
+------------------------
+
+The entire library is distributed as a single assembly.  You should
+only need to place the assembly in your system path and all of the
+code should be accessible to your .NET environment.
+
+Building the Source Release
+---------------------------
+
+Building the source distribution requires only a .NET command line
+compiler.  This distribution has been developed and tested with both
+Mono (0.29) and the Microsoft .NET Framework (1.1).
+
+Currently, the library uses a single Makefile because there is nothing
+complicated about the build (you can even do it by hand).  Detailed
+instructions for using Make are included in the Makefile.
+
+Once the project has been built, it may be used by following the
+instructions in the 'Using the Binary Release' section.
+
+
+Reporting Bugs
+--------------
+
+Bugs and other problems may be directed to the te-code-users mailing
+list hosted on SourceForge.
+
+
+Latest Releases
+---------------
+
+The latest version of the code is always available via SourceForge's
+anonymous CVS facilities.  Information on accessing the project source
+code can be found at http://te-code.sourceforge.net.

@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSLib", "CSLib\CSLib.csproj", "{EE81A244-604C-4CD3-816F-4F150ACD885A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncludeCheckerLib", "IncludeCheckerLib\IncludeCheckerLib.csproj", "{50FE0368-1578-44E2-9420-1842F3BA2FF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncludeChecker", "IncludeChecker\IncludeChecker.csproj", "{E011E249-97BE-499B-9DAD-E6EF2D85F78C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TECommon", "ThirdParty\TECommon\TECommon.csproj", "{2499737E-A14E-45FA-9D95-11558E15D45E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release Beta|Any CPU = Release Beta|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE81A244-604C-4CD3-816F-4F150ACD885A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE81A244-604C-4CD3-816F-4F150ACD885A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE81A244-604C-4CD3-816F-4F150ACD885A}.Release Beta|Any CPU.ActiveCfg = Release|Any CPU
+		{EE81A244-604C-4CD3-816F-4F150ACD885A}.Release Beta|Any CPU.Build.0 = Release|Any CPU
+		{EE81A244-604C-4CD3-816F-4F150ACD885A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE81A244-604C-4CD3-816F-4F150ACD885A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50FE0368-1578-44E2-9420-1842F3BA2FF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50FE0368-1578-44E2-9420-1842F3BA2FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50FE0368-1578-44E2-9420-1842F3BA2FF4}.Release Beta|Any CPU.ActiveCfg = Release Beta|Any CPU
+		{50FE0368-1578-44E2-9420-1842F3BA2FF4}.Release Beta|Any CPU.Build.0 = Release Beta|Any CPU
+		{50FE0368-1578-44E2-9420-1842F3BA2FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50FE0368-1578-44E2-9420-1842F3BA2FF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E011E249-97BE-499B-9DAD-E6EF2D85F78C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E011E249-97BE-499B-9DAD-E6EF2D85F78C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E011E249-97BE-499B-9DAD-E6EF2D85F78C}.Release Beta|Any CPU.ActiveCfg = Release Beta|Any CPU
+		{E011E249-97BE-499B-9DAD-E6EF2D85F78C}.Release Beta|Any CPU.Build.0 = Release Beta|Any CPU
+		{E011E249-97BE-499B-9DAD-E6EF2D85F78C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E011E249-97BE-499B-9DAD-E6EF2D85F78C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2499737E-A14E-45FA-9D95-11558E15D45E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2499737E-A14E-45FA-9D95-11558E15D45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2499737E-A14E-45FA-9D95-11558E15D45E}.Release Beta|Any CPU.ActiveCfg = Release|Any CPU
+		{2499737E-A14E-45FA-9D95-11558E15D45E}.Release Beta|Any CPU.Build.0 = Release|Any CPU
+		{2499737E-A14E-45FA-9D95-11558E15D45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2499737E-A14E-45FA-9D95-11558E15D45E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

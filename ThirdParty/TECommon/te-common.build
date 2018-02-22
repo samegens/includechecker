@@ -1,0 +1,261 @@
+<?xml version="1.0"?>
+<!--
+//////////////////////////////////////////////////////////////////////
+//
+// Copyright (c) 2002-2004, Andrew S. Townley
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 
+//     * Redistributions of source code must retain the above
+//     copyright notice, this list of conditions and the following
+//     disclaimer.
+// 
+//     * Redistributions in binary form must reproduce the above
+//     copyright notice, this list of conditions and the following
+//     disclaimer in the documentation and/or other materials provided
+//     with the distribution.
+// 
+//     * Neither the names Andrew Townley and Townley Enterprises,
+//     Inc. nor the names of its contributors may be used to endorse
+//     or promote products derived from this software without specific
+//     prior written permission.  
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+// FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+// COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+// INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+// (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+// STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+// OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// File:	te-common.build
+// Created:	Tue Jun  8 18:50:10 IST 2004
+// Description:
+//	NAnt (http://nant.sourceforge.net) build file.
+//
+//////////////////////////////////////////////////////////////////////
+-->
+
+<project name="te-common" default="all" basedir=".">
+	<property name="basedir"	value="${nant.project.basedir}"/>
+	<property name="app.name"	value="te-common"/>
+	<property name="build.version"	value="version.properties"/>
+	<property name="build.tests"	value="build/tests"/>
+	<property name="reports.tests"	value="build/reports"/>
+	<property name="lib.dir"	value="lib"/>
+	<property name="lib.name"	value="${app.name}.dll"/>
+	<property name="src.dir"	value="src"/>
+	<property name="docs.dir"	value="docs"/>
+	<property name="msdn.docs"	value="${docs.dir}/msdn"/>
+	<property name="tests.dir"	value="tests/nunit"/>
+	<property name="tests.lib.dir"	value="tests/lib"/>
+	<property name="tests.lib.name"	value="${build.tests}/${app.name}-tests.dll"/>
+	<property name="custom.tasks"	value="nant-tasks/TownleyEnterprises.NAnt.Tasks.dll"/>
+
+	<target name="bootstrap">
+		<csc target="library" output="${custom.tasks}">
+			<sources>
+				<include name="nant-tasks/*.cs"/>
+				<include name="src/io/AbstractLineProcessor.cs"/>
+				<include name="src/io/ILineProcessor.cs"/>
+				<include name="src/io/PropertyFileProcessor.cs"/>
+				<include name="src/io/TextFileProcessor.cs"/>
+				<include name="src/io/Serializer.cs"/>
+				<include name="src/config/Properties.cs"/>
+				<include name="src/config/IConfigSupplier.cs"/>
+				<include name="src/common/Paths.cs"/>
+			</sources>
+			<references>
+				<include name="lib/NAnt.Core.dll"/>
+			</references>
+		</csc>
+		<loadtasks assembly="${custom.tasks}"/>
+	</target>
+
+	<target name="stamp" depends="bootstrap">
+		<buildstamp versioninfo="${build.version}"
+				devname="9999"
+				verbose="true">
+			<fileset dir="${basedir}">
+				<include name="**/*.in"/>
+			</fileset>
+		</buildstamp>
+	</target>
+
+	<target name="stamp-count" depends="bootstrap">
+		<buildstamp versioninfo="${build.version}"
+				count="true"
+				verbose="true">
+			<fileset dir="${basedir}">
+				<include name="**/*.in"/>
+			</fileset>
+		</buildstamp>
+	</target>
+
+	<target name="stamp-clean" depends="bootstrap">
+		<buildstamp versioninfo="${build.version}"
+				verbose="true" clean="true">
+			<fileset dir="${basedir}">
+				<include name="**/*.in"/>
+			</fileset>
+		</buildstamp>
+		<property name="version" value="${build.version.major}.${build.version.minor}.${build.version.release}"/>
+		<property name="dist.dir" value="${app.name}-${version}"/>
+	</target>
+
+	<target name="version" depends="bootstrap">
+		<buildstamp versioninfo="${build.version}"
+				import="true"/>
+		<property name="version" value="${build.version.major}.${build.version.minor}.${build.version.release}"/>
+		<property name="dist.dir" value="${app.name}-${version}"/>
+	</target>
+
+	<target name="all" depends="stamp, compile-lib"/>
+
+	<target name="cmbuild" depends="stamp-count, bin-dist"/>
+
+	<target name="compile-lib">
+		<csc target="library" output="${lib.name}"
+				nowarn="1591" debug="true"
+				doc="${app.name}.xml">
+			<sources>
+				<include name="src/**/*.cs"/>
+			</sources>
+		</csc>
+	</target>
+
+	<target name="distdirs">
+		<mkdir dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}/bin"/>
+		<mkdir dir="${dist.dir}/examples"/>
+		<mkdir dir="${dist.dir}/docs"/>
+
+		<copy file="LICENSE" todir="${dist.dir}" />
+		<copy file="RELEASE-NOTES" todir="${dist.dir}" />
+		<copy file="BUGS" todir="${dist.dir}" />
+		<copy file="TODO" todir="${dist.dir}" />
+		<copy file="ChangeLog" todir="${dist.dir}" />
+		<copy file="${build.version}" todir="${dist.dir}" />
+		<copy todir="${dist.dir}/bin">
+			<fileset basedir="${lib.dir}">
+				<include name="**/*.dll"/>
+			</fileset>
+		</copy>
+		<!--
+		<copy todir="${dist.dir}/examples">
+			<fileset dir="examples"/>
+		</copy>
+		-->
+	</target>
+
+	<target name="bin-dist" depends="version,compile-lib,docs,distdirs">
+		<copy file="${lib.name}" todir="${dist.dir}/bin" />
+		<copy file="${custom.tasks}" todir="${dist.dir}/bin" />
+		<if test="${not nant.platform.unix}">
+			<copy todir="${dist.dir}/docs">
+				<fileset basedir="docs">
+					<include name="**/**"/>
+				</fileset>
+			</copy>
+		</if>
+		<zip zipfile="${dist.dir}.zip">
+			<fileset basedir=".">
+				<include name="${dist.dir}/**"/>
+			</fileset>
+		</zip>
+	</target>
+
+	<target name="clean">
+		<delete file="${lib.name}" failonerror="false"/>
+		<delete dir="build" failonerror="false"/>
+		<delete dir="${msdn.docs}" failonerror="false"/>
+	</target>
+
+	<target name="distclean" depends="clean,stamp-clean">
+		<delete file="${custom.tasks}" failonerror="false"/>
+		<delete dir="${dist.dir}"/>
+		<delete file="${dist.dir}.zip"/>
+	</target>
+
+	<!-- unit tests -->
+	<target name="compile-tests" depends="compile-lib">
+		<mkdir dir="${build.tests}"/>
+		<csc target="library" output="${tests.lib.name}"
+				debug="true">
+			<sources>
+				<include name="tests/nunit/**/*.cs"/>
+			</sources>
+			<references>
+				<include name="${lib.name}"/>
+				<include name="${tests.lib.dir}/*.dll"/>
+			</references>
+		</csc>
+	</target>
+
+	<target name="nunit" depends="compile-tests">
+		<copy todir="${build.tests}" flatten="true">
+			<fileset dir="${basedir}">
+				<include name="${lib.name}"/>
+				<include name="**/*.pdb"/>
+			</fileset>
+		</copy>
+		<nunit2 verbose="true">
+			<formatter type="Plain"/>
+			<test>
+				<assemblies>
+					<include name="${tests.lib.name}"/>
+				</assemblies>
+			</test>
+		</nunit2>
+	</target>
+	
+	<!-- documentation -->
+	<target name="docs" depends="compile-lib">
+		<if test="${not nant.platform.unix}">
+		<mkdir dir="${msdn.docs}"/>
+		<ndoc>
+			<assemblies>
+				<include name="${lib.name}"/>
+			</assemblies>
+			<summaries basedir="${docs.dir}">
+				<include name="namespaces.xml" />
+			</summaries>
+			<documenters>
+				<documenter name="MSDN">
+					<property name="OutputDirectory" value="${msdn.docs}"/>
+					<property name="HtmlHelpName" value="${nant.project.name}"/>
+					<property name="HtmlHelpCompilerFilename" value="hhc.exe"/>
+					<property name="IncludeFavorites" value="false"/>
+					<property name="Title" value="Townley Enterprises Public API"/>
+					<property name="SplitTOCS" value="false"/>
+					<property name="DefaultTOC" value=""/>
+					<property name="ShowVisualBasic" value="true"/>
+					<!--
+					<property name="ShowMissingSummaries" value="true"/>
+					<property name="ShowMissingRemarks" value="true"/>
+					<property name="ShowMissingParams" value="true"/>
+					<property name="ShowMissingReturns" value="true"/>
+					<property name="ShowMissingValues" value="true"/>
+					-->
+					<property name="DocumentInternals" value="false"/>
+					<property name="DocumentPrivates" value="false"/>
+					<property name="DocumentProtected" value="true"/>
+					<property name="DocumentEmptyNamespaces" value="false"/>
+					<property name="IncludeAssemblyVersion" value="true"/>
+					<property name="CopyrightText" value="Copyright (c) 2001-2004, Andrew S. Townley.  All Rights Reserved."/>
+					<property name="CopyrightHref" value=""/>
+					<property name="CleanIntermediates" value="true"/>
+				</documenter>
+			</documenters>
+		</ndoc>
+		</if>
+	</target>
+</project>

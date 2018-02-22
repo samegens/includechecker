@@ -1,0 +1,44 @@
+<devpal>
+	<includechecker>
+		<settings>
+			<!-- If the verbose element is present, IncludeChecker will display which tags it finds from each header. -->
+			<!--
+			<verbose/>
+			-->
+			
+			<!-- By default IncludeChecker will use the ctags.exe from the ctags directory next to IncludeChecker.exe.
+				 You can specify an other path if you want to use a different ctags.exe or want to put it in a
+				 different directory. -->
+			<!--
+			<ctags_path>c:\my_ctags\ctags.exe<ctags_path>
+			-->
+			
+			<!-- Include paths are needed to find .h files. This will typically be the same list that is used by the
+				 sources that are being checked. -->
+			<include_path>c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include</include_path>
+			<!-- On 32-bit Windows you need to remove " (x86)" from the Program Files path. -->
+	
+			<!-- Define type alias prefixes, see complex.cpp. -->
+			<type_alias_prefix>c</type_alias_prefix>
+			<type_alias_prefix>p</type_alias_prefix>
+			<type_alias_prefix>r</type_alias_prefix>
+			<type_alias_prefix>rc</type_alias_prefix>
+	
+			<!-- Define type alias suffixes, see Car.h. -->
+			<type_alias_suffix>Quad</type_alias_suffix>
+			
+			<ignore_header>
+				<!-- Always ignore pragmas.h, because it does not contain any declarations. See all cpp files. -->
+				<header>pragmas.h</header>
+
+				<!-- It's possible to add a source element:
+				<source>somesource.cpp</source>
+				which means that the header will only be ignored for that one source file. -->
+			</ignore_header>
+			
+			<!-- Headers that are to be processed as interface headers (which means that they don't actually declare anything, but include other headers that do).
+				 See CarFactory.cpp. -->
+			<interface_header>Cars.h</interface_header>
+		</settings>
+	</includechecker>
+</devpal>

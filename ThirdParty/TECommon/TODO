@@ -1,0 +1,46 @@
+
+TODO Items for te-common
+========================
+
+* General testing and bug fixes/clean-ups for 2.0 Release
+
+* Add more support files to the distribution
+
+com.townleyenterprises.command Package
+
+* Fix the CommandParser so that it understands more of the
+  relationships between arguments.  There's still too much
+  effort spent to check for conflicting arguments.  Also
+  should be a way to figure out how to better handle
+  arguments which can be used alone or with other arguments.
+
+* Support combined and single-dash arguments
+
+* Provide alternate streams for error and output to ease
+  testing of error and output messages
+
+* Provide a way to support plugable handlers for error and
+  output operations to ease testing and provide more flexibility.
+
+* Provide i18n support
+
+* Provide suppot for grouping sets of options for a single
+  CommandListener.
+
+com.townleyenterprises.common Package
+
+* Clean up the documentation (what little there is)
+
+* Refactor the AppConfig class so that it can support multiple
+  applications running in the same JVM (say, like a web container).
+
+com.townleyenterprises.persistence Package
+
+* Figure out how to really make the SQLFilterAdapter work
+  the way it is supposed to.  At the moment, it can generate
+  SQL, but doesn't generate *useful* SQL.
+
+com.townleyenterprises.swing Package
+
+* Make the ResourceLoader aware of Locales so that specific
+  ones can be loaded

@@ -1,0 +1,5 @@
+|this|line|has|no|item|one
+This|is|the|first|line
+This|is|the|second|line
+this|line|has|no|last|token|
+this||line|is|missing|a|token

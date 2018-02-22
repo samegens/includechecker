@@ -1,0 +1,8 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Release" />
+  <Config name="Release" binpathtype="Auto">
+    <assembly path="CSLib\bin\Release\CSLib.dll" />
+    <assembly path="IncludeCheckerLib\bin\Release\IncludeCheckerLib.dll" />
+  </Config>
+  <Config name="Debug" binpathtype="Auto" />
+</NUnitProject>

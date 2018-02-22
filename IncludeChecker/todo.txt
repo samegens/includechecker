@@ -1,0 +1,21 @@
+
+- custom -I options to ctags, this is needed to correctly parse some headers (eg __out_bcount_full_opt)
+- ignore forward declarations, this will need extra options to specify custom declaration
+	macros (DECLARE_CLASS, etc)
+- file and directory command argument should be repeatable
+- Only look for stand-alone functions (filter out member functions)
+	Use the tag file for this? This format mentions the scope of a function/member (struct, class, namespace or nothing).
+- Support #<ws>include
+- Support includes with \ and /
+- Add definitions for type-extensions:
+	- aliases (CoreObject -> aCoreObject), to use these types you need the actual include
+	- reference (CoreObject -> rCoreObject/rcCoreObject/pCoreObject/pcCoreObject), to use these types
+		you need a forward declaration. To do this correctly you have to parse (inline) code (maybe
+		it's good enough to find the variables (members, globals and locals) and search for . or ->).
+	- split in prefix and suffix?
+- Generate XML with results?
+- Specify extra tags for includes. This is useful when using STL, because of all the
+	nasty includes and typedefs, the types you're using are not directly declared in the
+	header you're including. So when you're including sstream and using the class istream,
+	IncludeChecker sees no tags used from the sstream include file. If you are able to specify
+	that sstream in fact is declaring istream, IncludeChecker will be happy.

@@ -1,0 +1,23 @@
+README for TE-Common.NET
+
+This directory contains the C# source for parts of the
+TE-Common library.  At the moment, the only parts of the
+library which are ported is the command-line argument
+handling.
+
+I originally tried to not do this project and instead use
+the Microsoft Java Conversion Assistant to automagically
+generate a .NET version.  Unfortunately, there were a number
+of issues with this approach.
+
+The code in this project started as a line-by-line port of
+the equivalent Java version of the library (TE_COMMON_CMBUILD_74),
+so it should include any bugs present in the Java version.
+Hopefully, I haven't introduced too many new ones specific
+to this implementation as this is my first serious C#
+programming effort.
+
+Andrew S. Townley
+May 18, 2004
+
+$Id: README,v 1.1.1.1 2004/05/19 10:43:38 atownley Exp $
