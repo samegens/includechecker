@@ -1,3 +1,7 @@
+# Build status
+
+[![Appveyor build status](https://ci.appveyor.com/api/projects/status/38t579lkeknh1807?svg=true)](https://ci.appveyor.com/project/samegens/includechecker)
+
 # IncludeChecker
 Unused #includes in C++ source lead to unwanted dependencies and slower compile and link timings.
 
@@ -15,6 +19,3 @@ Features:
 - Global type prefixes and suffixes can be configured.
 - Easy to setup to run as a build check.
 
-# Build status
-
-![Appveyor build status](https://ci.appveyor.com/api/projects/status/38t579lkeknh1807?svg=true)
