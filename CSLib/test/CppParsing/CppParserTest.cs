@@ -24,7 +24,7 @@ class hello {
 class hello {
 };
 ";
-			Assert.AreEqual(expected_contents.Replace("\\r", ""), contents.Replace("\\r", ""));
+			Assert.AreEqual(expected_contents.Replace("\r", ""), contents.Replace("\r", ""));
 		}
 
 		[Test]
