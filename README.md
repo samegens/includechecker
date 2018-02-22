@@ -17,4 +17,4 @@ Features:
 
 # Build status
 
-![Appveyor build status](https://ci.appveyor.com/api/projects/status/38t579lkeknh1807?svg=true Appveyor build status)
+![Appveyor build status](https://ci.appveyor.com/api/projects/status/38t579lkeknh1807?svg=true)
